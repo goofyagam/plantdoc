@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PlantDoc — Plant Disease Diagnoser</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>PlantDoc</h1>
+      <p class="subtitle">Identify plant leaf problems & get remedies</p>
+    </header>
+
+    <section class="card upload-card">
+      <div class="preview-wrap">
+        <img id="preview" alt="photo preview" class="preview-img hidden" />
+        <div id="camera-frame" class="camera-frame hidden">
+          <video id="video" playsinline autoplay></video>
+          <button id="snap" class="btn small">Capture</button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input id="fileInput" type="file" accept="image/*" />
+        <div class="row">
+          <button id="openCamera" class="btn">Open Camera</button>
+          <button id="stopCamera" class="btn ghost">Stop Camera</button>
+          <button id="analyzeBtn" class="btn primary">Analyze</button>
+        </div>
+
+        <label class="small muted">Tip: Use F12 → Toggle device toolbar to test mobile view on your laptop.</label>
+      </div>
+    </section>
+
+    <section class="card result-card hidden" id="resultCard">
+      <h2>Diagnosis</h2>
+      <pre id="resultText" class="result-text"></pre>
+    </section>
+
+    <div id="toast" class="toast hidden"></div>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
