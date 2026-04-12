@@ -61,5 +61,12 @@
   </main>
 
   <script src="/static/app.js"></script>
+  <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/sw.js")
+    .then(() => console.log("Service Worker Registered"))
+    .catch(err => console.log("Service Worker Failed", err));
+}
+</script>
 </body>
 </html>
