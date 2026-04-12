@@ -1,0 +1,35 @@
+{
+  "name": "PlantDoc AI",
+  "short_name": "PlantDoc",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e6f2f2",
+  "theme_color": "#4CAF50",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "description": "This is an AI-powered application that detects plant leaf diseases from images and provides symptoms, confidence levels, and recommended remedies to help users maintain healthy crops",
+  "id": "plantdoc.ai",
+  "dir": "ltr",
+  "scope": "/",
+  "lang": "en",
+  "categories": [
+    "education",
+    "health",
+    "lifestyle",
+    "medical",
+    "photo",
+    "productivity",
+    "utilities"
+  ]
+}
