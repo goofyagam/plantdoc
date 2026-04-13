@@ -31,6 +31,10 @@ from flask import send_from_directory
 def serve_sw():
     return send_from_directory(os.getcwd(), 'sw.js')
 
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json')
+
 
 def resize_image_bytes(image_bytes: bytes, max_size=1024) -> bytes:
     """Resize image to max_size (px) on largest side and return JPEG bytes."""
