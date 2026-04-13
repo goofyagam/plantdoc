@@ -25,6 +25,11 @@ if not API_KEY:
 client = genai.Client(api_key=API_KEY)
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
+from flask import send_from_directory
+
+@app.route('/sw.js')
+def serve_sw():
+    return send_from_directory(os.getcwd(), 'sw.js')
 
 
 def resize_image_bytes(image_bytes: bytes, max_size=1024) -> bytes:
