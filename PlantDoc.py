@@ -27,6 +27,12 @@ client = genai.Client(api_key=API_KEY)
 app = Flask(__name__, static_folder="static", template_folder="templates")
 from flask import send_from_directory
 
+@app.route('/.well-known/<path:filename>')
+def well_known(filename):
+    return send_from_directory('.well-known', filename)
+
+from flask import send_from_directory
+
 @app.route('/sw.js')
 def serve_sw():
     return send_from_directory(os.getcwd(), 'sw.js')
