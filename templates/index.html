@@ -12,14 +12,14 @@
   <main class="app">
 
     <header class="app-header">
-      <h1>🌿 PlantDoc</h1>
+      <h1>🌿 PlantDoc AI 🌿</h1>
       <p class="subtitle">AI-powered plant disease detection</p>
     </header>
 
     <div class="card">
 
       <form id="uploadForm">
-        <input type="file" id="fileInput" accept="image/*" required />
+        <input type="file" id="fileInput" accept="image/*" capture="environment" required />
 
         <div class="buttons">
           <button type="button" id="cameraBtn">📸 Camera</button>
@@ -61,6 +61,11 @@
   </main>
 
   <script src="/static/app.js"></script>
+  <script>
+document.getElementById("cameraBtn").addEventListener("click", function() {
+    document.getElementById("fileInput").click();
+});
+</script>
   <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js")
