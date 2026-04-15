@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.onrender.plantdoc_0ipv.twa",
-      "sha256_cert_fingerprints": ["YOUR_SHA256_HERE"]
+      "sha256_cert_fingerprints": ["F4:75:C4:41:94:79:5D:1D:27:A1:28:A2:72:E9:B5:5B:E0:74:DA:76:C9:EE:29:91:AF:37:D5:54:71:86:42:29"]
     }
   }
 ]
