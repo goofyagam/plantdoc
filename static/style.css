@@ -111,3 +111,6 @@ ul {
 .hidden {
   display: none;
 }
+#fileInput {
+    display: none;
+}
