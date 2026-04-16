@@ -112,5 +112,6 @@ ul {
   display: none;
 }
 #fileInput {
-    display: none;
+  opacity: 0;
+  position: absolute;
 }
