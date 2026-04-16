@@ -3,7 +3,9 @@ const fileInput = document.getElementById("fileInput");
 const preview = document.getElementById("preview");
 const resultDiv = document.getElementById("result");
 const loading = document.getElementById("loading");
-
+document.getElementById("cameraBtn").addEventListener("click", () => {
+    document.getElementById("fileInput").click();
+});
 // Image preview
 fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
