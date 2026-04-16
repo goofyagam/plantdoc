@@ -4,86 +4,79 @@ const preview = document.getElementById("preview");
 const resultDiv = document.getElementById("result");
 const loading = document.getElementById("loading");
 
-// Show image preview
+// Image preview
 fileInput.addEventListener("change", () => {
-  const file = fileInput.files[0];
-  if (file) {
-    const img = document.createElement("img");
-    img.src = URL.createObjectURL(file);
-    preview.innerHTML = "";
-    preview.appendChild(img);
-  }
+    const file = fileInput.files[0];
+    if (file) {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.style.width = "100%";
+        img.style.borderRadius = "10px";
+
+        preview.innerHTML = "";
+        preview.appendChild(img);
+    }
 });
 
 // Form submit
 form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  const formData = new FormData();
-  formData.append("file", file);
-
-  loading.classList.remove("hidden");
-  resultDiv.classList.add("hidden");
-
-  try {
-    const res = await fetch("/api/analyze", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await res.json();
-
-    if (data.result) {
-      formatResult(data.result);
-    } else {
-      resultDiv.innerText = "Error: " + data.error;
+    const file = fileInput.files[0];
+    if (!file) {
+        resultDiv.innerText = "Please select an image first.";
+        return;
     }
-  } catch (err) {
-    resultDiv.innerText = "Something went wrong.";
-  }
 
-  loading.classList.add("hidden");
+    const formData = new FormData();
+    formData.append("file", file);
+
+    // UI states
+    loading.classList.remove("hidden");
+    resultDiv.classList.add("hidden");
+    resultDiv.innerText = "";
+
+    try {
+        const res = await fetch("/api/analyze", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await res.json();
+
+        // ✅ Correct logic
+        if (data.error) {
+            resultDiv.innerText = "❌ " + data.error;
+        } else {
+            formatResult(data.result);
+        }
+
+    } catch (err) {
+        resultDiv.innerText = "❌ Error: " + err.message;
+    }
+
+    loading.classList.add("hidden");
 });
 
-// Format and display result
+// Format AI result nicely
 function formatResult(text) {
-  const resultDiv = document.getElementById("result");
-  resultDiv.classList.remove("hidden");
+    resultDiv.classList.remove("hidden");
 
-  const lines = text.split("\n");
+    // Split lines safely
+    const lines = text.split("\n").filter(l => l.trim() !== "");
 
-  // Disease
-  document.getElementById("disease").innerText =
-    lines[0] || "Not detected";
+    // Clear previous
+    resultDiv.innerHTML = "";
 
-  // Confidence
-  document.getElementById("confidence").innerText =
-    "Based on AI analysis";
+    // Title
+    const title = document.createElement("h3");
+    title.innerText = "Analysis Result";
+    resultDiv.appendChild(title);
 
-  const symptomsList = document.getElementById("symptoms");
-  const remediesList = document.getElementById("remedies");
-
-  symptomsList.innerHTML = "";
-  remediesList.innerHTML = "";
-
-  // Symptoms (first few lines)
-  lines.slice(1, 6).forEach((line) => {
-    if (line.trim()) {
-      let li = document.createElement("li");
-      li.innerText = line.trim();
-      symptomsList.appendChild(li);
-    }
-  });
-
-  // Remedies (remaining lines)
-  lines.slice(6).forEach((line) => {
-    if (line.trim()) {
-      let li = document.createElement("li");
-      li.innerText = line.trim();
-      remediesList.appendChild(li);
-    }
-  });
+    // Show all lines cleanly
+    lines.forEach(line => {
+        const p = document.createElement("p");
+        p.innerText = line;
+        resultDiv.appendChild(p);
+    });
 }
