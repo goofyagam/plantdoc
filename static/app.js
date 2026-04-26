@@ -89,21 +89,3 @@ function formatResult(text) {
     });
 }
 
-    // Split lines safely
-    const lines = text.split("\n").filter(l => l.trim() !== "");
-
-    // Clear previous
-    resultDiv.innerHTML = "";
-
-    // Title
-    const title = document.createElement("h3");
-    title.innerText = "Analysis Result";
-    resultDiv.appendChild(title);
-
-    // Show all lines cleanly
-    lines.forEach(line => {
-        const p = document.createElement("p");
-        p.innerText = line;
-        resultDiv.appendChild(p);
-    });
-}
