@@ -73,7 +73,20 @@ form.addEventListener("submit", async (e) => {
 // Format AI result nicely
 function formatResult(text) {
     resultDiv.classList.remove("hidden");
-    resultDiv.innerHTML = "<pre>" + text + "</pre>";
+
+    resultDiv.innerHTML = "";
+
+    const lines = text.split("\n").filter(l => l.trim() !== "");
+
+    const title = document.createElement("h3");
+    title.innerText = "🌿 Analysis Result";
+    resultDiv.appendChild(title);
+
+    lines.forEach(line => {
+        const p = document.createElement("p");
+        p.innerText = line;
+        resultDiv.appendChild(p);
+    });
 }
 
     // Split lines safely
