@@ -6,6 +6,19 @@ const loading = document.getElementById("loading");
 document.getElementById("cameraBtn").addEventListener("click", () => {
     document.getElementById("fileInput").click();
 });
+const uploadBtn = document.getElementById("uploadBtn");
+
+// Camera button
+document.getElementById("cameraBtn").addEventListener("click", () => {
+    fileInput.setAttribute("capture", "environment");
+    fileInput.click();
+});
+
+// Upload button
+uploadBtn.addEventListener("click", () => {
+    fileInput.removeAttribute("capture");
+    fileInput.click();
+});
 // Image preview
 fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
@@ -63,6 +76,8 @@ form.addEventListener("submit", async (e) => {
 // Format AI result nicely
 function formatResult(text) {
     resultDiv.classList.remove("hidden");
+    resultDiv.innerHTML = "<pre>" + text + "</pre>";
+}
 
     // Split lines safely
     const lines = text.split("\n").filter(l => l.trim() !== "");
